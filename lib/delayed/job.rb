@@ -8,7 +8,7 @@ module Delayed
   # A job object that is persisted to the database.
   # Contains the work object as a YAML field.
   class Job < ActiveRecord::Base
-    attr_protected
+    #attr_protected
     MAX_ATTEMPTS = 25
     MAX_RUN_TIME = 4.hours
     set_table_name :delayed_jobs
@@ -19,7 +19,7 @@ module Delayed
     cattr_accessor :destroy_failed_jobs
     self.destroy_failed_jobs = true
     
-    # attr_accessible :payload_object, :priority, :run_at
+    attr_accessible :payload_object, :priority, :run_at,:attempts,:handler,:last_error,:locked_at,:failed_at,:locked_by
    
     # Every worker has a unique name which by default is the pid of the process.
     # There are some advantages to overriding this with something which survives worker retarts:
